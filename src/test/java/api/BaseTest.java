@@ -17,7 +17,7 @@ public class BaseTest {
                 .given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .header("Bearer_Token", "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YjY5ZmEzNDIwY2Q1MTJhM2FhOWRmY2JiMDhkNzQ5YSIsIm5iZiI6MTc2MzU2MDQzNi4wNTEsInN1YiI6IjY5MWRjYmY0Mjc0NTc1MmRmMjJlMWFjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iHYwcFA4x8HO6VqKtXmQX_QrujNVjwdoCMz1xh2Yazc")
-                .queryParam("status_code", "12");
+                .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YjY5ZmEzNDIwY2Q1MTJhM2FhOWRmY2JiMDhkNzQ5YSIsIm5iZiI6MTc2MzU2MDQzNi4wNTEsInN1YiI6IjY5MWRjYmY0Mjc0NTc1MmRmMjJlMWFjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iHYwcFA4x8HO6VqKtXmQX_QrujNVjwdoCMz1xh2Yazc")
+
     }
 }
