@@ -1,49 +1,80 @@
 package api;
 
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static io.restassured.RestAssured.responseSpecification;
+import static org.hamcrest.Matchers.*;
 
-public class US_345 extends BaseTest{
+public class US_345 extends BaseTest {
 
-    private int MediaId;
 
-    @Test(priority = 1, description = ("The movie has been added to favorites"))
-    public void addFavorite(){
+    @Test(priority = 1, description = "get account details")
+    public void getAccountDetails() {
 
-        String addFavoriteBody= """
-            {
-              "media_type":"movie",
-              "media_id":550,
-              "favorite":true
-            }
-          """;
-
-        Response response = given()
-                .spec(request)
-                .body(addFavoriteBody)
-
-                .pathParams("account_id","22484351")
-                .when()
-                .post("/account/{account_id}/favorite")
-
-                .then()
-                .statusCode(201)
-                .body("status_code", equalTo(1))
-                .body("status_message", equalTo("Success."))
-                .extract().response();
-
-        System.out.println("Favorite Result = " + response.path("status_message"));
-    }
-    }
-/*
-    @Test(priority = 2,description = "")
-    public void addToWatchlist(){
+        Response response =
+                given()
+                        .spec(request)
+                        .when()
+                        .get("/account/22484351")
+                        .then()
+                        .statusCode(200)
+                        .extract().response();
+        response.body().prettyPrint();
 
     }
 
 
- */
+
+    @Test(priority = 2,description = "add to Favorite movies")
+    public void addFavoriteMovie() {
+
+        Map<String, String> addRating = new HashMap<>();
+        addRating.put("value", "8,5");
+
+        Response response =
+                given()
+                        .spec(request)
+                        .body(addRating)
+                        .when()
+                        .post("movie/550/rating")
+                        .then()
+                        .statusCode(201)
+
+                        .extract().response();
+
+        response.body().prettyPrint();
+    }
+
+    @Test(priority = 3, description = "add to watchlist movie")
+    public void addToWatchlist() {
+
+        String addWatchlistBody = """
+                
+                {
+                "media_type":"movie",
+                 "media_id":11,
+                 "watchlist":true
+                 }
+                """;
+        Response response =
+                given()
+                        .spec(request)
+                        .body(addWatchlistBody)
+                        .when()
+                        .post("/account/11/watchlist")
+                        .then()
+                        .statusCode(201)
+                        .extract().response();
+
+        response.body().prettyPrint();
+
+    }
+}
+
+
