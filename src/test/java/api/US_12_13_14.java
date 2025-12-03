@@ -10,7 +10,7 @@ public class US_12_13_14 extends BaseTest{
     int accountID=22496308; // beklemede
 
     @Test(priority = 1,description = "US-12 get top rated movie")
-        public void getTopRatedMovie(){
+    public void getTopRatedMovie(){
         Response response =
                 given()
                         .spec(request)
@@ -51,5 +51,6 @@ public class US_12_13_14 extends BaseTest{
                         .extract().response();
         response.prettyPrint();
     }
+
 
 }
